@@ -1,11 +1,10 @@
+import { useTheme } from 'app/providers/ThemeProvider'
+import { AboutPage } from 'pages/AboutPage'
+import { MainPage } from 'pages/MainPage'
 import { Suspense } from 'react'
 import { Link, Route, Routes } from 'react-router-dom'
-import Loading from './components/Loading'
-import { classNames } from './helpers/ClassNames'
-import { AboutPageLazy } from './pages/AboutPage/AboutPage.async'
-import { MainPageLazy } from './pages/MainPage/MainPage.async'
+import { classNames } from 'shared/lib/classNames'
 import './styles/index.scss'
-import { useTheme } from './theme/useTheme'
 
 const App: React.FC = () => {
 	const { theme, toggleTheme } = useTheme()
@@ -15,10 +14,16 @@ const App: React.FC = () => {
 			<button onClick={toggleTheme}>toggleTheme</button>
 			<Link to={'/'}>Главная</Link>
 			<Link to={'/about'}>О сайте</Link>
-			<Suspense fallback={<Loading />}>
+			<Suspense
+				fallback={
+					<p>
+						<i>Loading...</i>
+					</p>
+				}
+			>
 				<Routes>
-					<Route path='/' element={<MainPageLazy />}></Route>
-					<Route path='/about' element={<AboutPageLazy />}></Route>
+					<Route path='/' element={<MainPage />}></Route>
+					<Route path='/about' element={<AboutPage />}></Route>
 				</Routes>
 			</Suspense>
 		</div>
