@@ -1,9 +1,7 @@
 import { useTheme } from 'app/providers/ThemeProvider'
-import { AboutPage } from 'pages/AboutPage'
-import { MainPage } from 'pages/MainPage'
-import { Suspense } from 'react'
-import { Link, Route, Routes } from 'react-router-dom'
 import { classNames } from 'shared/lib/classNames'
+import { Navbar } from 'widgets/Navbar'
+import { AppRouter } from './providers/router'
 import './styles/index.scss'
 
 const App: React.FC = () => {
@@ -11,21 +9,9 @@ const App: React.FC = () => {
 
 	return (
 		<div className={classNames('app', {}, [theme])}>
+			<Navbar />
+			<AppRouter />
 			<button onClick={toggleTheme}>toggleTheme</button>
-			<Link to={'/'}>Главная</Link>
-			<Link to={'/about'}>О сайте</Link>
-			<Suspense
-				fallback={
-					<p>
-						<i>Loading...</i>
-					</p>
-				}
-			>
-				<Routes>
-					<Route path='/' element={<MainPage />}></Route>
-					<Route path='/about' element={<AboutPage />}></Route>
-				</Routes>
-			</Suspense>
 		</div>
 	)
 }
