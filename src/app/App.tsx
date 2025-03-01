@@ -10,6 +10,7 @@ const App: React.FC = () => {
 	return (
 		<div className={classNames('app', {}, [theme])}>
 			<Navbar />
+			<Navbar />
 			<AppRouter />
 			<button onClick={toggleTheme}>toggleTheme</button>
 		</div>
