@@ -1,28 +1,42 @@
-import { classNames } from './classNames'
+import { classNames } from 'shared/lib/classNames/classNames'
 
 describe('classNames', () => {
-	test('first param', () => {
-		expect(classNames('testClass')).toBe('testClass')
+	test('with only first param', () => {
+		expect(classNames('someClass')).toBe('someClass')
 	})
 
-	test('second param', () => {
+	test('with additional class', () => {
+		const expected = 'someClass class1 class2'
+		expect(classNames('someClass', {}, ['class1', 'class2'])).toBe(expected)
+	})
+
+	test('with mods', () => {
+		const expected = 'someClass class1 class2 hovered scrollable'
 		expect(
-			classNames('testClass', { secondParam1: true, secondParam2: true }, [])
-		).toBe('testClass secondParam1 secondParam2')
-	})
-
-	test('third param', () => {
-		expect(classNames('testClass', {}, ['third_param1', 'third_param2'])).toBe(
-			'testClass third_param1 third_param2'
-		)
-	})
-
-	test('all param', () => {
-		expect(
-			classNames('testClass', { secondParam1: true, secondParam2: false }, [
-				'third_param1',
-				'third_param2',
+			classNames('someClass', { hovered: true, scrollable: true }, [
+				'class1',
+				'class2',
 			])
-		).toBe('testClass third_param1 third_param2 secondParam1')
+		).toBe(expected)
+	})
+
+	test('with mods false', () => {
+		const expected = 'someClass class1 class2 hovered'
+		expect(
+			classNames('someClass', { hovered: true, scrollable: false }, [
+				'class1',
+				'class2',
+			])
+		).toBe(expected)
+	})
+
+	test('with mods undefined', () => {
+		const expected = 'someClass class1 class2 hovered'
+		expect(
+			classNames('someClass', { hovered: true, scrollable: undefined }, [
+				'class1',
+				'class2',
+			])
+		).toBe(expected)
 	})
 })

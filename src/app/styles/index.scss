@@ -1,14 +1,12 @@
 @use 'reset';
 @use 'variables/global';
-@use 'theme/dark';
-@use 'theme/light';
+@use 'themes/normal';
+@use 'themes/dark';
 
 .app {
 	font: var(--font-m);
-
 	background: var(--bg-color);
 	color: var(--primary-color);
-
 	min-height: 100vh;
 }
 
