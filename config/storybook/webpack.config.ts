@@ -11,17 +11,14 @@ export default ({ config }: { config: webpack.Configuration }) => {
         src: path.resolve(__dirname, '..', '..', 'src'),
     };
 
-    // Create a new config object to avoid mutating the original
     const newConfig: webpack.Configuration = { ...config };
 
-    // Update resolve configuration
     newConfig.resolve = {
         ...newConfig.resolve,
         modules: [...(newConfig.resolve?.modules || []), paths.src],
         extensions: [...(newConfig.resolve?.extensions || []), '.ts', '.tsx'],
     };
 
-    // Process existing rules to exclude SVGs, then add new SVG and CSS loaders
     const processedRules = (newConfig.module?.rules || []).map((rule: RuleSetRule) => {
         const isSvgRule = rule.test && rule.test.toString().includes('svg');
         if (isSvgRule) {
@@ -30,7 +27,6 @@ export default ({ config }: { config: webpack.Configuration }) => {
         return rule;
     });
 
-    // Update module rules
     newConfig.module = {
         ...newConfig.module,
         rules: [
