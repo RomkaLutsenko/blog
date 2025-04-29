@@ -8,9 +8,7 @@ const meta: Meta<typeof AppLink> = {
   title: 'shared/AppLink',
   component: AppLink,
   tags: ['autodocs'],
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
+  argTypes: {},
   args: { 
     children: 'Text',
     to: '/',

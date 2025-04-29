@@ -11,9 +11,7 @@ const meta: Meta<typeof ErrorPage> = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
+  argTypes: {},
   args: {},
 };
 
