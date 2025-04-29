@@ -7,20 +7,20 @@ import { ThemeDecorator } from '../../src/shared/config/storybook/ThemeDecorator
 import 'app/styles/index.scss'; // просто импорт стилей здесь
 
 const preview: Preview = {
-  parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/,
-      },
+    parameters: {
+        actions: { argTypesRegex: '^on[A-Z].*' },
+        controls: {
+            matchers: {
+                color: /(background|color)$/i,
+                date: /Date$/,
+            },
+        },
     },
-  },
-  decorators: [
-    StyleDecorator,
-    ThemeDecorator(Theme.LIGHT),
-    RouterDecorator,
-  ],
+    decorators: [
+        StyleDecorator,
+        ThemeDecorator(Theme.LIGHT),
+        RouterDecorator,
+    ],
 };
 
 export default preview;

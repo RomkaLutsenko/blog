@@ -5,25 +5,25 @@ import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDeco
 import { NotFoundPage } from './NotFoundPage';
 
 const meta: Meta<typeof NotFoundPage> = {
-  title: 'pages/NotFoundPage',
-  component: NotFoundPage,
-  parameters: {
-    layout: 'centered',
-  },
-  tags: ['autodocs'],
-  argTypes: {},
-  args: {},
+    title: 'pages/NotFoundPage',
+    component: NotFoundPage,
+    parameters: {
+        layout: 'centered',
+    },
+    tags: ['autodocs'],
+    argTypes: {},
+    args: {},
 };
 
 export default meta;
 type Story = StoryObj<typeof NotFoundPage>;
 
 export const Light: Story = {
-  args: {},
+    args: {},
 };
 
 export const Dark: Story = {
-  args: {},
+    args: {},
 };
 
-Dark.decorators = [ThemeDecorator(Theme.DARK)]
+Dark.decorators = [ThemeDecorator(Theme.DARK)];

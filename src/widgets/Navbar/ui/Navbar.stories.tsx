@@ -5,25 +5,25 @@ import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDeco
 import { Navbar } from './Navbar';
 
 const meta: Meta<typeof Navbar> = {
-  title: 'widget/Navbar',
-  component: Navbar,
-  parameters: {
-    layout: 'centered',
-  },
-  tags: ['autodocs'],
-  argTypes: {},
-  args: { },
+    title: 'widget/Navbar',
+    component: Navbar,
+    parameters: {
+        layout: 'centered',
+    },
+    tags: ['autodocs'],
+    argTypes: {},
+    args: { },
 };
 
 export default meta;
 type Story = StoryObj<typeof Navbar>;
 
 export const Light: Story = {
-  args: {},
+    args: {},
 };
 
 export const Dark: Story = {
-  args: {},
+    args: {},
 };
 
-Dark.decorators = [ThemeDecorator(Theme.DARK)]
+Dark.decorators = [ThemeDecorator(Theme.DARK)];

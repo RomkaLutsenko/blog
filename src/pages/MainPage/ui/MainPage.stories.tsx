@@ -5,27 +5,27 @@ import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDeco
 import MainPage from './MainPage';
 
 const meta: Meta<typeof MainPage> = {
-  title: 'pages/MainPage',
-  component: MainPage,
-  parameters: {
-    layout: 'centered',
-  },
-  tags: ['autodocs'],
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
-  args: {},
+    title: 'pages/MainPage',
+    component: MainPage,
+    parameters: {
+        layout: 'centered',
+    },
+    tags: ['autodocs'],
+    argTypes: {
+        backgroundColor: { control: 'color' },
+    },
+    args: {},
 };
 
 export default meta;
 type Story = StoryObj<typeof MainPage>;
 
 export const Light: Story = {
-  args: {},
+    args: {},
 };
 
 export const Dark: Story = {
-  args: {},
+    args: {},
 };
 
-Dark.decorators = [ThemeDecorator(Theme.DARK)]
+Dark.decorators = [ThemeDecorator(Theme.DARK)];

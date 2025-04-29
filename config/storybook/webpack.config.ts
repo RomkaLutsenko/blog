@@ -3,32 +3,45 @@ import webpack, { RuleSetRule } from 'webpack';
 import { buildCssLoader } from '../build/loaders/buildCssLoader';
 import { BuildPaths } from '../build/types/config';
 
-
-export default ({config}: {config: webpack.Configuration}) => {
+export default ({ config }: { config: webpack.Configuration }) => {
     const paths: BuildPaths = {
         build: '',
         entry: '',
         html: '',
         src: path.resolve(__dirname, '..', '..', 'src'),
-    }
+    };
 
-    config.resolve.modules.push(paths.src)
-    config.resolve.extensions.push('.ts', '.tsx')
+    // Create a new config object to avoid mutating the original
+    const newConfig: webpack.Configuration = { ...config };
 
-    config.module.rules = config.module.rules.map((rule: RuleSetRule) => {
-        if(/svg/.test(rule.test as string)) {
-            return { ...rule, exclude: /\.svg$/i }
+    // Update resolve configuration
+    newConfig.resolve = {
+        ...newConfig.resolve,
+        modules: [...(newConfig.resolve?.modules || []), paths.src],
+        extensions: [...(newConfig.resolve?.extensions || []), '.ts', '.tsx'],
+    };
+
+    // Process existing rules to exclude SVGs, then add new SVG and CSS loaders
+    const processedRules = (newConfig.module?.rules || []).map((rule: RuleSetRule) => {
+        const isSvgRule = rule.test && rule.test.toString().includes('svg');
+        if (isSvgRule) {
+            return { ...rule, exclude: /\.svg$/i };
         }
+        return rule;
+    });
 
-        return rule
-    })
+    // Update module rules
+    newConfig.module = {
+        ...newConfig.module,
+        rules: [
+            ...processedRules,
+            {
+                test: /\.svg$/,
+                use: ['@svgr/webpack'],
+            },
+            buildCssLoader(true),
+        ],
+    };
 
-    config.module.rules.push({
-        test: /\.svg$/,
-        use: ['@svgr/webpack'],
-    })
-
-    config.module.rules.push(buildCssLoader(true))
-
-    return config
-}
+    return newConfig;
+};
